@@ -26,7 +26,7 @@ In these implementations, each cell of the sparse table represents a zero indexe
 
 Overlap friendly (min example):
 ```cpp
-int sp[18][2*N];
+int sp[18][N];
 
 void construct(int n) {
 	int k = floor(log2(n));
@@ -49,7 +49,7 @@ Non-Overlap friendly (xor sum example)
 ```cpp
 // sparse table
 // N = 2 * 1e5
-int sp[18][2*N];
+int sp[18][N];
 
 void construct(int n) {
 	int k = floor(log2(n));

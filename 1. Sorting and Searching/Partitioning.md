@@ -1,0 +1,2 @@
+## Overview
+- C++ provides a built-in method to partition a vector with signature`std::nth_element(begin, nth, end)`. Essentially, it partitions the range $[\textbf{begin}, \textbf{end}]$ about the element at the $n$th position in the range.

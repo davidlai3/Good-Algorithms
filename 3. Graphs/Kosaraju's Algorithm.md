@@ -1,6 +1,6 @@
 ## Overview
-- Kosaraju's Algorithm is an algorithm used for detecting strongly connected components in a graph.
-- Runtime: $O(|V| + |E|)$
+- Kosaraju's Algorithm is an algorithm used for detecting strongly connected components in a directed graph.
+- Time: $O(|V| + |E|)$
 
 ## Steps
 1. Perform a series of depth first searches over the graph until all nodes have been visited

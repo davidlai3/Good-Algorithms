@@ -4,7 +4,7 @@
 - The idea is to answer the queries in a special order based on the indices. We will first answer all queries which have the left index in block 0, then answer all queries which have left index in block 1 and so on
 ## Steps
 - Parse all queries and array values
-- Sort all queries primarily by $\lfloor \frac{L_i}{\sqrt{N}} \rfloor$, and secondarily by $R_i$  
+- Sort all queries primarily by $\left\lfloor \frac{L_i}{\sqrt{N}} \right\rfloor$, and secondarily by $R_i$  
 - Initialize left and right pointers to start of array
 - Initialize an accumulator or any required structure to keep track of result
 - Iterate through sorted queries, shifting left and right pointers as necessary

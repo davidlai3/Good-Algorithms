@@ -1,5 +1,5 @@
 ## Overview
-- A topological sort of a directed acyclic graph is a linear ordering of its vertices such that for every directed edge $u\to v$ from vertex $u$ to vertex $v$,  $u$  comes before $v$ in the ordering.
+- A topological sort of a directed acyclic graph is a linear ordering of its vertices such that for every directed edge $u\to v$ from vertex $u$ to vertex $v$,  $u$  comes before $v$ in the ordering. There are two approaches for implementing: A queue based approach and a DFS-based approach.
 - In other words, each node is sorted based on ascending degree
 - Time: $O(V + E)$
 - Space : $O(V + E)$
@@ -14,8 +14,7 @@
 3. After visiting child nodes (post-order), add the parent node to the front of a list. 
 4. Repeat until all nodes are visited.
 - The list will contain a topological sort of the nodes.
-
-## Implementation
+## Implementation: DFS
 ```c++
 vector<int> top_sort;
 vector<vector<int>> graph;
@@ -73,5 +72,43 @@ answer:;
 		cout << "IMPOSSIBLE" << endl;
 	}
 }
+```
 
+## Implementation: Queue (Kahn's Algorithm)
+```cpp
+
+void sol() {
+	int n, m; cin >> n >> m;
+	vector<vector<int>> adj(n);
+	for (int i = 0; i < m; i++) {
+		int u, v; cin >> u >> v;
+		adj[u].push_back(v);
+	}
+	vector<int> ins(n, 0);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < adj[i].size(); j++) {
+			ins[adj[i][j]]++;
+		}
+	}
+
+	queue<int> topo;
+	// push sources
+	for (int i = 0; i < n; i++) {
+		if (ins[i] == 0) topo.push(i);
+	}
+
+	vector<int> topo_sort(n);
+	int cnt = 0;
+	while (cnt < n) {
+		if (!topo.size()) break; // this must mean there's a cycle
+		int x = topo.front(); topo.pop();
+		topo_sort[cnt++] = x++;
+		for (int i = 0; i < adj[x].size()) {
+			ins[adj[x][i]]--;
+			if (ins[adj[x][i]] == 0) {
+				topo.push(adj[x][i]);
+			}
+		}
+	}
+}
 ```

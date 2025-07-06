@@ -18,7 +18,7 @@ int seg[4*N];
 void build(const vector<int> &a, int idx, int tl, int tr) {
 	if (tl == tr) seg[idx] = a[tl];
 	else {
-		int tm = (tl+tr)/2;
+		int tm = (tl+tr) >> 1;
 		build(a, idx*2, tl, tm);
 		build(a, idx*2+1, tm+1, tr);
 		seg[idx] = seg[idx*2] + seg[idx*2+1]; // sum query
@@ -29,7 +29,7 @@ void build(const vector<int> &a, int idx, int tl, int tr) {
 int query(int idx, int tl, int tr, int l, int r) {
 	if (l > r) return 0;
 	if (l == tl && r == tr) return seg[idx];
-	int tm = (tl+tr)/2;
+	int tm = (tl+tr) >> 1;
 	return query(idx*2, tl, tm, l, min(r, tm)) + 
 		query(idx*2+1, tm+1, tr, max(l, tm+1), r);
 }
@@ -39,7 +39,7 @@ void update(int idx, int tl, int tr, int pos, int new_val) {
 		seg[idx] = new_val;
 		return;
 	}
-	int tm = (tl+tr)/2;
+	int tm = (tl+tr) >> 1;
 	if (pos <= tm) update(idx*2, tl, tm, pos, new_val);
 	else update(idx*2+1, tm+1, tr, pos, new_val);
 
@@ -54,6 +54,10 @@ void sol() {
 	// must start at idx 1 because of idx*2
 	build(a, 1, 0, n-1);
 
+	for (int i = 0; i < q; i++) {
+		int l, r; cin >> l >> r;
+		cout << query(1, 0, n-1, l-1, r-1) << endl;
+	}
 }
 ```
 ## Practice Problems
